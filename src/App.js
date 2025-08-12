@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   HeaderBar,
   Carousel,
@@ -53,37 +54,38 @@ export default function App() {
       />
 
       <Carousel
-        slides={[
-          {
-            image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-06-45.png",
-            heading: "Bestsellers",
-            subheading: "Customer favorites all in one place",
-            buttonText: "Learn More",
-            buttonLink: "#",
-          },
-          {
-            image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-08-22.png",
-            heading: "Exclusive Deals",
-            subheading: "Members get special discounts",
-            buttonText: "Learn More",
-            buttonLink: "#",
-          },
-        ]}
-        alignLeft={true}
-        fontColor="#000000"
-      />
+  slides={[
+    {
+      image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-06-45.png",
+      heading: "Bestsellers",
+      subheading: "Customer favorites all in one place",
+      buttonText: "Learn More",
+      buttonLink: "#",
+    },
+    {
+      image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-08-22.png",
+      heading: "Exclusive Deals",
+      subheading: "Members get special discounts",
+      buttonText: "Learn More",
+      buttonLink: "#",
+    },
+  ]}
+  alignLeft={true}
+  fontColor="#000000"
+/>
+
 
       {/* Full images */}
       <FullImage image="/storefront/cover_01/screenshot_from_2025-02-11_11-14-43.png" />
       <FullImageDark
         image="/storefront/cover_02/screenshot_from_2025-02-11_11-17-16.png"
-        heading="Join Our Community"
-        subheading="Be the first to know about new drops."
+        heading=""
+        subheading=""
       />
 
       <SocialBar
         brandColor="#ffffffff"
-        fontColor="#000000ff"
+        fontColor="#3b3838ff"
         text="Let's Relocate Together"
         links={[
           { href: "https://facebook.com/yourpage", label: "Facebook" },
