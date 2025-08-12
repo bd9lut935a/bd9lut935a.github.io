@@ -1,0 +1,3 @@
+- fix button color upon hover
+- fix button color upon hover of slide select toggles
+- tuck text container under, boolean for carousel
