@@ -34,6 +34,7 @@ export default function App() {
         ]}
         interval={3000}
         darkOverlay={true}
+        fontColor="#ffffffff"
       />
 
       {/* Info sections */}
@@ -71,7 +72,9 @@ export default function App() {
     },
   ]}
   alignLeft={true}
+  interval={3000}
   fontColor="#000000"
+  textBelowOnMobile={true}
 />
 
 

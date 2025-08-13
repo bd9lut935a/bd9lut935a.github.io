@@ -13,44 +13,48 @@ export const Carousel = ({
   interval = 4000,
   darkOverlay = false,
   alignLeft = false,
-  fontColor = darkOverlay ? "#fff" : "#000",
-  buttonColor,
+  fontColor = "#000",
+  textBelowOnMobile = false, // NEW toggle
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hovered, setHovered] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
-  useEffect(() => {
-    if (isPaused) return; // pause auto sliding when true
+  const isLightColor = (hex) => {
+    const c = hex.replace("#", "");
+    const r = parseInt(c.substring(0, 2), 16);
+    const g = parseInt(c.substring(2, 4), 16);
+    const b = parseInt(c.substring(4, 6), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.6;
+  };
 
+  const lightBase = isLightColor(fontColor);
+
+  useEffect(() => {
+    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, interval);
-
     return () => clearInterval(timer);
   }, [slides.length, interval, isPaused]);
 
-  const defaultTextColor = darkOverlay ? "#fff" : "#000";
-  const defaultBorderColor = darkOverlay ? "#fff" : "#000";
-
-  const btnTextColor = buttonColor || defaultTextColor;
-  const btnBorderColor = buttonColor || defaultBorderColor;
-
-  const buttonStyle = {
-    color: btnTextColor,
-    borderColor: btnBorderColor,
+  const buttonBaseStyle = {
+    color: fontColor,
+    borderColor: fontColor,
     backgroundColor: "transparent",
     minWidth: 0,
+    transition: "all 0.3s ease",
   };
 
   const buttonHoverStyle = {
-    color: btnBorderColor,
-    backgroundColor: btnTextColor,
+    color: lightBase ? "#000" : "#fff",
+    backgroundColor: fontColor,
+    borderColor: fontColor,
   };
 
   const arrowButtonStyle = {
     position: "absolute",
-    bottom: "1rem",              // moved to bottom
+    bottom: "1rem",
     backgroundColor: "rgba(0,0,0,0.3)",
     border: "none",
     color: "#fff",
@@ -77,28 +81,23 @@ export const Carousel = ({
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Left Arrow */}
+      {/* Arrows */}
       <button
         style={{ ...arrowButtonStyle, left: "1rem" }}
         onClick={handlePrev}
         aria-label="Previous Slide"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
       >
         ‹
       </button>
-
-      {/* Right Arrow */}
       <button
         style={{ ...arrowButtonStyle, right: "1rem" }}
         onClick={handleNext}
         aria-label="Next Slide"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
       >
         ›
       </button>
 
+      {/* Slides */}
       <div
         className="flex transition-transform duration-700"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -113,7 +112,6 @@ export const Carousel = ({
               backgroundPosition: "center",
               backgroundColor: "gray",
               aspectRatio: "16 / 9",
-              height: "auto",
               minHeight: "60vh",
               width: "100%",
             }}
@@ -122,26 +120,34 @@ export const Carousel = ({
               <div className="absolute inset-0 bg-black bg-opacity-50"></div>
             )}
 
-            {/* Text + Button Overlay */}
+            {/* Overlayed Text (hidden on mobile if textBelowOnMobile) */}
             <div
-              className={`absolute z-20 px-6 py-4 flex flex-col space-y-4 ${
-                alignLeft
-                  ? "left-0 top-1/2 transform -translate-y-1/2 w-1/3 text-left"
-                  : "inset-0 justify-center items-center max-w-max mx-auto text-center"
-              }`}
+              className={`absolute z-20 px-6 py-4 flex flex-col space-y-4 transition-all duration-300 
+                ${textBelowOnMobile ? "hidden md:flex" : "flex"}
+                ${
+                  alignLeft
+                    ? "left-0 top-1/2 transform -translate-y-1/2 w-1/3 text-left"
+                    : "inset-0 justify-center items-center max-w-max mx-auto text-center"
+                }`}
               style={{ color: fontColor, minWidth: alignLeft ? "250px" : "auto" }}
             >
-              <h2 className="text-5xl font-bold leading-tight">{slide.heading}</h2>
+              <h2 className="text-5xl font-bold leading-tight">
+                {slide.heading}
+              </h2>
               <p className="text-xl">{slide.subheading}</p>
               {slide.buttonText && slide.buttonLink && (
                 <a
                   href={slide.buttonLink}
-                  className={`border font-semibold py-3 px-5 rounded text-xl transition-colors duration-300 inline-block max-w-full truncate ${
+                  className={`border font-semibold py-3 px-5 rounded text-xl inline-block max-w-full truncate ${
                     alignLeft ? "self-start" : "mx-auto"
                   }`}
-                  style={hovered ? buttonHoverStyle : buttonStyle}
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
+                  style={buttonBaseStyle}
+                  onMouseEnter={(e) =>
+                    Object.assign(e.target.style, buttonHoverStyle)
+                  }
+                  onMouseLeave={(e) =>
+                    Object.assign(e.target.style, buttonBaseStyle)
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -152,6 +158,33 @@ export const Carousel = ({
           </div>
         ))}
       </div>
+
+      {/* Text Below (mobile-only if textBelowOnMobile) */}
+      {textBelowOnMobile && (
+        <div className="md:hidden px-6 py-4 space-y-4 text-center" style={{ color: fontColor }}>
+          <h2 className="text-3xl font-bold leading-tight">
+            {slides[currentIndex].heading}
+          </h2>
+          <p className="text-lg">{slides[currentIndex].subheading}</p>
+          {slides[currentIndex].buttonText && slides[currentIndex].buttonLink && (
+            <a
+              href={slides[currentIndex].buttonLink}
+              className="border font-semibold py-2 px-4 rounded text-lg inline-block"
+              style={buttonBaseStyle}
+              onMouseEnter={(e) =>
+                Object.assign(e.target.style, buttonHoverStyle)
+              }
+              onMouseLeave={(e) =>
+                Object.assign(e.target.style, buttonBaseStyle)
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {slides[currentIndex].buttonText}
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -164,35 +197,56 @@ export const ImageTextSection = ({
   reverse,
   buttonText,
   buttonLink,
+  fontColor = "#000", // new prop
 }) => {
-  const buttonClasses =
-    "inline-block border border-black text-black bg-transparent font-semibold py-3 px-5 rounded hover:bg-black hover:text-white transition-colors duration-300 text-xl";
+  const isLightColor = (hex) => {
+    const c = hex.replace("#", "");
+    const r = parseInt(c.substring(0, 2), 16);
+    const g = parseInt(c.substring(2, 4), 16);
+    const b = parseInt(c.substring(4, 6), 16);
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    return luminance > 0.6;
+  };
+
+  const lightBase = isLightColor(fontColor);
+
+  const buttonBaseStyle = {
+  color: fontColor,
+  border: `1px solid ${fontColor}`, // restore border
+  backgroundColor: "transparent",
+  transition: "all 0.3s ease",
+};
+
+const buttonHoverStyle = {
+  color: lightBase ? "#000" : "#fff",
+  backgroundColor: fontColor,
+  border: `1px solid ${fontColor}`, // keep border consistent on hover
+};
 
   return (
     <section className="flex flex-col md:flex-row items-start md:items-center">
-      {/* Image always order-1 on mobile, changes to order 1 or 2 on md depending on reverse */}
-      <div
-        className={`order-1 md:w-1/2 ${
-          reverse ? "md:order-2" : "md:order-1"
-        }`}
-      >
+      {/* Image */}
+      <div className={`order-1 md:w-1/2 ${reverse ? "md:order-2" : "md:order-1"}`}>
         <img src={image} alt={heading} className="w-full h-full object-cover" />
       </div>
 
-      {/* Text always order-2 on mobile, changes to order 1 or 2 on md depending on reverse */}
-      <div
-        className={`order-2 md:w-1/2 p-8 text-left ${
-          reverse ? "md:order-1" : "md:order-2"
-        }`}
-      >
-        <h3 className="text-4xl font-bold mb-4">{heading}</h3>
-        <p className="text-gray-600 mb-4 text-xl">{subheading}</p>
+      {/* Text */}
+      <div className={`order-2 md:w-1/2 p-8 text-left ${reverse ? "md:order-1" : "md:order-2"}`}>
+        <h3 className="text-4xl font-bold mb-4" style={{ color: fontColor }}>
+          {heading}
+        </h3>
+        <p className="text-xl mb-4" style={{ color: fontColor }}>
+          {subheading}
+        </p>
         {buttonText && buttonLink && (
           <a
             href={buttonLink}
-            className={buttonClasses}
+            style={buttonBaseStyle}
+            onMouseEnter={(e) => Object.assign(e.target.style, buttonHoverStyle)}
+            onMouseLeave={(e) => Object.assign(e.target.style, buttonBaseStyle)}
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-block font-semibold py-3 px-5 rounded text-xl"
           >
             {buttonText}
           </a>
@@ -201,8 +255,6 @@ export const ImageTextSection = ({
     </section>
   );
 };
-
-
 
 // FULL IMAGE
 export const FullImage = ({ image }) => (
