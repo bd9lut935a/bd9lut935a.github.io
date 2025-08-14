@@ -18,14 +18,21 @@ export default function App() {
       <Carousel
         slides={[
           {
-            image: "/storefront/slideshow_01/screenshot_from_2025-02-12_11-10-54.png",
+            image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-16-05.png",
             heading: "New Arrivals",
             subheading: "Check out our latest products",
             buttonText: "Learn More",
             buttonLink: "#",
           },
           {
-            image: "/storefront/slideshow_01/screenshot_from_2025-02-12_11-11-21.png",
+            image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-18-01.png",
+            heading: "Summer Sale",
+            subheading: "Up to 50% off selected items",
+            buttonText: "Learn More",
+            buttonLink: "#",
+          },
+          {
+            image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-19-21.png",
             heading: "Summer Sale",
             subheading: "Up to 50% off selected items",
             buttonText: "Learn More",
@@ -39,14 +46,14 @@ export default function App() {
 
       {/* Info sections */}
       <ImageTextSection
-        image="/storefront/info_01/screenshot_from_2025-02-11_14-14-43.png"
+        image="/storefront/info_01/bd9_assembly.gif"
         heading="Handcrafted Quality"
         subheading="Our products are made with care and attention to detail."
         buttonText="Learn More"
         buttonLink="#"
       />
       <ImageTextSection
-        image="/storefront/info_02/screenshot_from_2025-02-11_10-13-19.png"
+        image="/storefront/info_02/screenshot_from_2025-08-14_14-57-29.png"
         heading="Sustainable Materials"
         subheading="We prioritize eco-friendly production."
         reverse
@@ -57,16 +64,23 @@ export default function App() {
       <Carousel
   slides={[
     {
-      image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-06-45.png",
+      image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-28-14.png",
       heading: "Bestsellers",
       subheading: "Customer favorites all in one place",
       buttonText: "Learn More",
       buttonLink: "#",
     },
     {
-      image: "/storefront/slideshow_02/screenshot_from_2025-02-11_11-08-22.png",
+      image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-28-49.png",
       heading: "Exclusive Deals",
       subheading: "Members get special discounts",
+      buttonText: "Learn More",
+      buttonLink: "#",
+    },
+    {
+      image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-29-06.png",
+      heading: "Fresh Picks",
+      subheading: "Latest additions you’ll love",
       buttonText: "Learn More",
       buttonLink: "#",
     },
@@ -77,11 +91,10 @@ export default function App() {
   textBelowOnMobile={true}
 />
 
-
       {/* Full images */}
-      <FullImage image="/storefront/cover_01/screenshot_from_2025-02-11_11-14-43.png" />
+      <FullImage image="/storefront/cover_01/screenshot_from_2025-08-14_15-33-12.png" />
       <FullImageDark
-        image="/storefront/cover_02/screenshot_from_2025-02-11_11-17-16.png"
+        image="/storefront/cover_02/screenshot_from_2025-08-14_14-27-27.png"
         heading=""
         subheading=""
       />
