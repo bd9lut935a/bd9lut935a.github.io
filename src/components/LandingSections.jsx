@@ -256,17 +256,36 @@ const buttonHoverStyle = {
   );
 };
 
-// FULL IMAGE
-export const FullImage = ({ image }) => (
-  <div>
-    <img src={image} alt="" className="w-full h-auto" />
-  </div>
-);
+export const FullImage = ({
+  image,
+  darkOverlay = false,
+  heading,
+  subheading,
+}) => {
+  return (
+    <div className="relative w-full">
+      <img src={image} alt="" className="w-full h-auto" />
+
+      {darkOverlay && (
+        <>
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          {(heading || subheading) && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
+              {heading && <h2 className="text-5xl font-bold">{heading}</h2>}
+              {subheading && <p className="mt-2 text-xl">{subheading}</p>}
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
 
 // FULL IMAGE DARK OVERLAY
 export const FullImageDark = ({ image, heading, subheading }) => (
   <div
-    className="relative w-full h-96 flex items-center justify-center text-white"
+    className="relative w-full h- flex items-center justify-center text-white"
     style={{
       backgroundImage: `url(${image})`,
       backgroundSize: "cover",

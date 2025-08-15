@@ -93,11 +93,8 @@ export default function App() {
 
       {/* Full images */}
       <FullImage image="/storefront/cover_01/screenshot_from_2025-08-14_15-33-12.png" />
-      <FullImageDark
-        image="/storefront/cover_02/screenshot_from_2025-08-14_14-27-27.png"
-        heading=""
-        subheading=""
-      />
+
+      <FullImage image="/storefront/cover_02/screenshot_from_2025-08-14_14-27-27.png" darkOverlay={true} />
 
       <SocialBar
         brandColor="#ffffffff"
