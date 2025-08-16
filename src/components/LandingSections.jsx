@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 // HEADER BAR with Logo Prop
-export const HeaderBar = ({ logo }) => (
+export const Header = ({ logo }) => (
   <header className="bg-white shadow py-4 px-6 flex justify-center">
     {/* scaled up from h-14 to h-21 (1.5x) */}
     <img src={logo} alt="Brand Logo" className="h-20" />
   </header>
 );
 
-export const Carousel = ({
+export const Slideshow = ({
   slides,
   interval = 4000,
   darkOverlay = false,
@@ -17,7 +17,6 @@ export const Carousel = ({
   textBelowOnMobile = false, // NEW toggle
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   const isLightColor = (hex) => {
     const c = hex.replace("#", "");
@@ -31,12 +30,11 @@ export const Carousel = ({
   const lightBase = isLightColor(fontColor);
 
   useEffect(() => {
-    if (isPaused) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, interval);
     return () => clearInterval(timer);
-  }, [slides.length, interval, isPaused]);
+  }, [slides.length, interval]);
 
   const buttonBaseStyle = {
     color: fontColor,
@@ -76,11 +74,7 @@ export const Carousel = ({
   };
 
   return (
-    <div
-      className="relative w-full overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <div className="relative w-full overflow-hidden">
       {/* Arrows */}
       <button
         style={{ ...arrowButtonStyle, left: "1rem" }}
@@ -189,8 +183,7 @@ export const Carousel = ({
   );
 };
 
-
-export const ImageTextSection = ({
+export const Info = ({
   image,
   heading,
   subheading,
@@ -256,7 +249,7 @@ const buttonHoverStyle = {
   );
 };
 
-export const FullImage = ({
+export const Cover = ({
   image,
   darkOverlay = false,
   heading,
@@ -281,28 +274,7 @@ export const FullImage = ({
   );
 };
 
-
-// FULL IMAGE DARK OVERLAY
-export const FullImageDark = ({ image, heading, subheading }) => (
-  <div
-    className="relative w-full h- flex items-center justify-center text-white"
-    style={{
-      backgroundImage: `url(${image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}
-  >
-    <div className="absolute inset-0 bg-black opacity-50"></div>
-    <div className="relative text-center">
-      {/* text-3xl → text-5xl */}
-      <h2 className="text-5xl font-bold">{heading}</h2>
-      {/* subheading base → text-xl */}
-      <p className="mt-2 text-xl">{subheading}</p>
-    </div>
-  </div>
-);
-
-export const SocialBar = ({
+export const Socials = ({
   brandColor = "#111827",
   fontColor = "#ffffff",
   text = "Follow us for updates",

@@ -1,7 +1,7 @@
 - finish laying out, landing for bd9
-- create documentation on component props
-- remove slide pause on carousel mouse hover
-- rename components based on folder structure
+- create documentation on component props ❤️
+- remove slide pause on Slideshow mouse hover ❤️
+- rename components based on folder structure ❤️
 - fix button color upon hover ❤️
 - fix button color upon hover of slide select toggles ❤️
-- tuck text container under, boolean for carousel ❤️
+- tuck text container under, boolean for Slideshow ❤️
