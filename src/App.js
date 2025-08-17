@@ -12,28 +12,28 @@ import {
 export default function App() {
   return (
     <>
-      <Header logo="/landing/bd5.logo.title.01.png" />
+      <Header logo="/landing/bd9_logo_title_01.png" />
 
       <Slideshow
         slides={[
           {
             image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-16-05.png",
-            heading: "New Arrivals",
-            subheading: "Check out our latest products",
+            heading: "Home Reimagined",
+            subheading: "Architecture that Speaks to the Soul.",
             buttonText: "Learn More",
             buttonLink: "#",
           },
           {
             image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-18-01.png",
-            heading: "Summer Sale",
-            subheading: "Up to 50% off selected items",
+            heading: "Home Reimagined",
+            subheading: "Architecture that Speaks to the Soul.",
             buttonText: "Learn More",
             buttonLink: "#",
           },
           {
             image: "/storefront/slideshow_01/screenshot_from_2025-08-14_11-19-21.png",
-            heading: "Summer Sale",
-            subheading: "Up to 50% off selected items",
+            heading: "Home Reimagined",
+            subheading: "Architecture that Speaks to the Soul.",
             buttonText: "Learn More",
             buttonLink: "#",
           },
@@ -46,40 +46,52 @@ export default function App() {
       {/* Info sections */}
       <Info
         image="/storefront/info_01/bd9_assembly.gif"
-        heading="Handcrafted Quality"
-        subheading="Our products are made with care and attention to detail."
+        heading="Affordable Scaleable Homes 🌲"
+        subheading="Step outside the box and into a dwelling that fits your living style, and grows with you and your community."
         buttonText="Learn More"
         buttonLink="#"
+        reverse
       />
       <Info
         image="/storefront/info_02/screenshot_from_2025-08-14_14-57-29.png"
-        heading="Sustainable Materials"
-        subheading="We prioritize eco-friendly production."
-        reverse
+        heading="Ancient Architecture, Modern Materials"
+        subheading="From honeycomb, to a foxes den, spheres are a friend of nature. Buckminster Fuller, to whom coined the geodesic dome, recognized the strength of stepping outside the traditional housing box."
         buttonText="Learn More"
         buttonLink="#"
+      />
+
+      <Info
+        image="/storefront/info_03/screenshot_from_2025-08-14_15-13-07.png"
+        heading="Designed with the Human Spirit in Mind."
+        subheading="🔧 Concrete Composite Components
+🌧️ Silicone Sealed Seams
+🌞 Configurable Windows and Skylights
+🏠 Easy Modular Assembly"
+        buttonText="Learn More"
+        buttonLink="#"
+        reverse
       />
 
       <Slideshow
   slides={[
     {
       image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-28-14.png",
-      heading: "Bestsellers",
-      subheading: "Customer favorites all in one place",
+      heading: "Single",
+      subheading: "1 bd | 1 ba | 1 kit | 774 sqft",
       buttonText: "Learn More",
       buttonLink: "#",
     },
     {
       image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-28-49.png",
-      heading: "Exclusive Deals",
-      subheading: "Members get special discounts",
+      heading: "Double",
+      subheading: "2 bd | 1 ba | 1 kit | 975 sqft",
       buttonText: "Learn More",
       buttonLink: "#",
     },
     {
       image: "/storefront/slideshow_02/screenshot_from_2025-08-14_15-29-06.png",
-      heading: "Fresh Picks",
-      subheading: "Latest additions you’ll love",
+      heading: "Family",
+      subheading: "3 bd | 2 ba | 1 kit | 1,221 sqft",
       buttonText: "Learn More",
       buttonLink: "#",
     },
@@ -105,7 +117,7 @@ export default function App() {
           { href: "https://twitter.com/yourpage", label: "Twitter" },
         ]}
       />
-      <Footer brandColor="#00153dff" />
+      <Footer brandColor="#00153dff" heading={"Terago - Live Wisely"} />
     </>
   );
 }

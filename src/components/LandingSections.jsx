@@ -228,7 +228,7 @@ const buttonHoverStyle = {
         <h3 className="text-4xl font-bold mb-4" style={{ color: fontColor }}>
           {heading}
         </h3>
-        <p className="text-xl mb-4" style={{ color: fontColor }}>
+        <p className="text-xl mb-4" style={{ color: fontColor, whiteSpace: "pre-line" }}>
           {subheading}
         </p>
         {buttonText && buttonLink && (
@@ -305,11 +305,11 @@ export const Socials = ({
 );
 
 // FOOTER with Brand Color Prop
-export const Footer = ({ brandColor }) => (
+export const Footer = ({ brandColor, heading }) => (
   <footer
     className="text-white py-8 px-6 text-center text-lg"
     style={{ backgroundColor: brandColor }}
   >
-    <p>© {new Date().getFullYear()} Your Store Name. All rights reserved.</p>
+    <p>© {new Date().getFullYear()} {heading}</p>
   </footer>
 );
